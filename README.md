@@ -1,6 +1,6 @@
 # 基礎 pip package 開發範例以及環境建置流程
 
-這份 Project  是從閱讀[本篇文章](good-practice)以及基礎 [PyTest 文件](pytest-test-assert-example)衍生而來一個簡單的 pip package 範例, 這個範例的主要目的是展示透過基礎的 python 工具建置一整個 [pip package](pip-packing) 的流程. 
+這份 Project  是從閱讀[本篇文章][good-practice]以及基礎 [PyTest 文件][pytest-test-assert-example]衍生而來一個簡單的 pip package 範例, 這個範例的主要目的是展示透過基礎的 python 工具建置一整個 [pip package][pip-packing] 的流程. 
 
 寫這份文件的目的也是為了展示一個相對完整的文件應該有的樣貌, 有 SOP 以及足夠的解釋項目. 所以本文所有步驟都是經過驗證, 以確保下列步驟在本文的列出環境下是可以運作的. 如果讀者本身環境已經建置相關工具並可以正常使用, 可以忽略第一項基礎環境建置的步驟.
 
@@ -130,7 +130,7 @@ from setuptools import setup, find_packages
 setup(name="PACKAGENAME",  packages=find_packages())
 ```
 
-其中 `PACKAGENAME` 就是之後 `pip install` 所使用的套件名稱, 如果想要知道的參數, 請詳閱[官方文件](pip-packing).
+其中 `PACKAGENAME` 就是之後 `pip install` 所使用的套件名稱, 如果想要知道的參數, 請詳閱[官方文件][pip-packing].
 
 # 4. 建置基礎開發流程
 
@@ -138,11 +138,11 @@ setup(name="PACKAGENAME",  packages=find_packages())
 
 ## python packaging 的一些基礎知識
 
-首先我建議大家先讀過[這份文件](python-packages-basic)先大概了解 python modules 的基本運作方法. Python module 基本上都是以目錄的形式居多, 目錄下的子目錄都視為 sub module. 讀取 submodule 的方法則是以 module 與 sub module 之間加上 `.` 為分隔. Eg: 目錄 `a/b` 的 package 為 `a.b`. Python 在搜尋 packages 的時候, 都會以當前目錄的 `___init___.py` 為進入點, 如果有需要初始化的程式碼可以放在這個檔案裡. 如果是在目錄底下的其他檔案, 則視為其他模組. Eg: `a/c.py` 視為 `a.c`.
+首先我建議大家先讀過[這份文件][python-packages-basic]先大概了解 python modules 的基本運作方法. Python module 基本上都是以目錄的形式居多, 目錄下的子目錄都視為 sub module. 讀取 submodule 的方法則是以 module 與 sub module 之間加上 `.` 為分隔. Eg: 目錄 `a/b` 的 package 為 `a.b`. Python 在搜尋 packages 的時候, 都會以當前目錄的 `___init___.py` 為進入點, 如果有需要初始化的程式碼可以放在這個檔案裡. 如果是在目錄底下的其他檔案, 則視為其他模組. Eg: `a/c.py` 視為 `a.c`.
 
 ## 目錄結構
 
-根據之前閱讀的[文章](good-practice)之中有詳細說明各種不同的目錄套件結構以及相關的使用情境. 我們設定一個比較簡單的情況來整理我們的程式碼.
+根據之前閱讀的[文章][good-practice]之中有詳細說明各種不同的目錄套件結構以及相關的使用情境. 我們設定一個比較簡單的情況來整理我們的程式碼.
 
 假設我們只需要一個套件, 但是我們不想把測試碼包進我們的套件, 此時可以用下列目錄結構.
 
@@ -167,7 +167,7 @@ setup(name="PACKAGENAME",  packages=find_packages())
 ./my_package/__init__.py
 ./my_package/power.py
 ```
-其中 `power_2` 函式是放在 `__init__.py` 當中, 所以 `import my_package` 很直覺得就可以使用 `my_package.power_2` 函式, 但是如果是要使用 `power_3` 函式得用 `import my_package.power` 並呼叫 `my_package.power.power_3`, 相較之下就沒這麼直覺了.  所以最好的方式是在 `__init__.py` 裡就 `import` 所有需要的函式就可以直覺的使用 `my_package.power_3`了. 有篇[短文章](exporting-functions-from-init)簡短的敘述了相關狀況.
+其中 `power_2` 函式是放在 `__init__.py` 當中, 所以 `import my_package` 很直覺得就可以使用 `my_package.power_2` 函式, 但是如果是要使用 `power_3` 函式得用 `import my_package.power` 並呼叫 `my_package.power.power_3`, 相較之下就沒這麼直覺了.  所以最好的方式是在 `__init__.py` 裡就 `import` 所有需要的函式就可以直覺的使用 `my_package.power_3`了. 有篇[短文章][exporting-functions-from-init]簡短的敘述了相關狀況.
 
 `__init__.py`範例
 
@@ -196,7 +196,7 @@ Python 有非常多的測試框架, 但是目前同時可以做單元測試以�
 ```
 ### 設定測試開發環境
 
-根據之前閱讀的[文章](good-practice), 我們可以透過下列指令把目前的 Project 目錄當成 package 目錄, 
+根據之前閱讀的[文章][good-practice], 我們可以透過下列指令把目前的 Project 目錄當成 package 目錄, 
 
 ```sh
 (runenv)$ pip3 install -e .
@@ -222,7 +222,7 @@ def test_power_2():
     assert my_package.power_2(2) == 4
 ```
 
-此測項是測試 `my_package.power_2` 的功能是計算參數的平方函式, 我們預期此函式帶參數 2 的結果為 4. 如果這個函式沒有滿足這項測試則會出現 Failed. 想要知道更多可以詳閱 `pytest` 的[官方文件](pytest-test-assert-example). 
+此測項是測試 `my_package.power_2` 的功能是計算參數的平方函式, 我們預期此函式帶參數 2 的結果為 4. 如果這個函式沒有滿足這項測試則會出現 Failed. 想要知道更多可以詳閱 `pytest` 的[官方文件][pytest-test-assert-example]. 
 
 ## 執行測試
 
@@ -236,7 +236,7 @@ def test_power_2():
 
 ## 打包
 
-以下內容[從此處](pip-packing)節錄.
+以下內容[從此處][pip-packing]節錄.
 
 `setuptools` 打包指令,
 
