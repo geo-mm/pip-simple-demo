@@ -122,7 +122,7 @@ $ source runenv/bin/activate
 
 ## 設定 setup.py
 
-根據之前閱讀的[文章](good-practice), 我們只需要確認根目錄底下有 `setup.py`, 而且`setup.py`裡有起碼底下的程式碼就可以讓 `pip` 就可以管理我們的套件,
+根據之前閱讀的[文章][good-practice], 我們只需要確認根目錄底下有 `setup.py`, 而且`setup.py`裡有起碼底下的程式碼就可以讓 `pip` 就可以管理我們的套件,
 
 ```python
 from setuptools import setup, find_packages
